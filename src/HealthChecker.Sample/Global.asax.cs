@@ -2,6 +2,7 @@
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Mvc;
+using HealthChecker.Redis;
 using HealthChecker.Sql;
 using Newtonsoft.Json.Serialization;
 
@@ -13,8 +14,14 @@ namespace HealthChecker.Sample
 		{
 			HealthCheck.AddHealthCheck()
 				.AddCheck("Example", () => HealthCheckResult.Healthy("Example is OK!"))
+				.AddRedis(name: "Redis Cache",
+					redisConnectionString:"localhost")
 				.AddSqlServer(name: "Core Database",
-					connectionString: "Data Source=localhost;Initial Catalog=modis_Core;User ID=coreuser;Password=Test12345");
+					connectionString: "Data Source=localhost;Initial Catalog=vanilla_Core;User ID=coreuser;Password=Test12345")
+				.AddSqlServer(name: "Master Database",
+					connectionString: "Data Source=localhost;Initial Catalog=vanilla_master;User ID=masteruser;Password=Test12345")
+				.AddSqlServer(name: "Web Database",
+					connectionString: "Data Source=localhost;Initial Catalog=vanilla_web;User ID=webuser;Password=Test12345");
 
 			GlobalConfiguration.Configuration.Formatters.Clear();
 			GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());

@@ -11,7 +11,7 @@ namespace HealthChecker
 		public HealthCheckRegistration(string name,
 			Func<IHealthCheck> factory,
 			HealthStatus? failureStatus,
-			IEnumerable<string> tags)
+			IEnumerable<string> tags = null)
 		{
 			if (factory == null)
 				throw new ArgumentNullException(nameof (factory));
@@ -25,7 +25,6 @@ namespace HealthChecker
 		}
 
 		public HealthStatus FailureStatus { get; set; }
-
 
 		public Func<IHealthCheck> Factory
 		{

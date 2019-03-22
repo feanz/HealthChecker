@@ -149,6 +149,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HealthChecker.Redis\HealthChecker.Redis.csproj">
+      <Project>{f8dff103-e440-476d-b151-ed953da09b00}</Project>
+      <Name>HealthChecker.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HealthChecker.Sql\HealthChecker.Sql.csproj">
       <Project>{4289c64d-9e91-47f7-a5a5-6b5bf671a0b0}</Project>
       <Name>HealthChecker.Sql</Name>
