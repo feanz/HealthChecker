@@ -12,9 +12,7 @@ namespace HealthChecker
 			TotalDuration = totalDuration;
 		}
 
-
 		public IReadOnlyDictionary<string, HealthReportEntry> Entries { get; }
-
 
 		public HealthStatus Status { get; }
 

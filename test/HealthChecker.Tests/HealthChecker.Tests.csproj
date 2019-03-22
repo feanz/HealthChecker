@@ -59,8 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultHealthCheckServiceTests.cs" />
+    <Compile Include="HealthCheckTests.cs" />
+    <Compile Include="HealthReportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHealthyHealthCheck.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,11 +4,52 @@ using Xunit;
 
 namespace HealthChecker.Tests
 {
-	public class DefaultHealthCheckServiceTests
+	public class HealthCheckTests
 	{
-		public DefaultHealthCheckServiceTests()
+		//todo add tests to cover:
+		//logging
+		//timeing
+		//exception during healthchecks
+		//predicate filtering
+		//mapping of health check result to health report entry
+		//validation of registrations
+		public HealthCheckTests()
 		{
 			HealthCheckRegistry.Instance.Registrations.Clear();
+		}
+
+		[Fact]
+		public void AddCheck_adds_registration_to_registry()
+		{
+			HealthCheck.AddHealthCheck()
+				.AddCheck("Example", () => HealthCheckResult.Healthy());
+
+			var actual = HealthCheckRegistry.Instance.Registrations.Count;
+
+			actual.Should().Be(1);
+		}
+
+		[Fact]
+		public void AddCheck_add_multiple_checks_to_registry()
+		{
+			HealthCheck.AddHealthCheck()
+				.AddCheck("Example", () => HealthCheckResult.Healthy())
+				.AddCheck("Example 2", () => HealthCheckResult.Healthy());
+
+			var actual = HealthCheckRegistry.Instance.Registrations.Count;
+
+			actual.Should().Be(2);
+		}
+
+		[Fact]
+		public void AddCheckGeneric_adds_registration_to_registry()
+		{
+			HealthCheck.AddHealthCheck()
+				.AddCheck<TestHealthyHealthCheck>("Example");
+
+			var actual = HealthCheckRegistry.Instance.Registrations.Count;
+
+			actual.Should().Be(1);
 		}
 
 		[Fact]

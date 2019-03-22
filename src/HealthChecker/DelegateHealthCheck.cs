@@ -6,17 +6,13 @@ namespace HealthChecker
 {
 	internal sealed class DelegateHealthCheck : IHealthCheck
 	{
-		private readonly Func<HealthCheckResult> _check;
-
-		public DelegateHealthCheck(Func<HealthCheckResult> check)
+		private readonly Func<CancellationToken, Task<HealthCheckResult>> _check;
+		
+		public DelegateHealthCheck(Func<CancellationToken, Task<HealthCheckResult>> check)
 		{
-			var func = check;
-			_check = func ?? throw new ArgumentNullException(nameof(check));
+			_check = check ?? throw new ArgumentNullException(nameof(check));
 		}
-
-		public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken)
-		{
-			return Task.FromResult(_check());
-		}
+		
+		public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken)) => _check(cancellationToken);
 	}
 }

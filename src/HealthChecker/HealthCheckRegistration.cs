@@ -8,6 +8,22 @@ namespace HealthChecker
 		private Func<IHealthCheck> _factory;
 		private string _name;
 
+		public HealthCheckRegistration(string name, 
+			IHealthCheck instance, 
+			HealthStatus? failureStatus, 
+			IEnumerable<string> tags = null)
+		{
+			if (instance == null)
+			{
+				throw new ArgumentNullException(nameof(instance));
+			}
+
+			Name = name ?? throw new ArgumentNullException(nameof(name));
+			FailureStatus = failureStatus ?? HealthStatus.Unhealthy;
+			Tags = new HashSet<string>(tags ?? Array.Empty<string>(), StringComparer.OrdinalIgnoreCase);
+			Factory = () => instance;
+		}
+
 		public HealthCheckRegistration(string name,
 			Func<IHealthCheck> factory,
 			HealthStatus? failureStatus,
