@@ -46,8 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HealthCheck\HealthChecker.csproj">
-      <Project>{3490C761-16DF-4C02-B895-A9660376E61F}</Project>
+    <ProjectReference Include="..\HealthChecker\HealthChecker.csproj">
+      <Project>{3490c761-16df-4c02-b895-a9660376e61f}</Project>
       <Name>HealthChecker</Name>
     </ProjectReference>
   </ItemGroup>
